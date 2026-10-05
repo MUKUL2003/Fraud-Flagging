@@ -1,0 +1,38 @@
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaTopic
+metadata:
+  name: transactions.raw
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: fraud-kafka
+spec:
+  partitions: 6
+  replicas: 1            # 3 on EKS
+  config:
+    retention.ms: 604800000
+---
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaTopic
+metadata:
+  name: transactions.flagged
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: fraud-kafka
+spec:
+  partitions: 3
+  replicas: 1
+  config:
+    retention.ms: 604800000
+---
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaTopic
+metadata:
+  name: transactions.dlq
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: fraud-kafka
+spec:
+  partitions: 1
+  replicas: 1
+  config:
+    retention.ms: 604800000
