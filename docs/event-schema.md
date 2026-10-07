@@ -82,8 +82,9 @@ has a wrong type, or breaks a rule in section 1 (for example, a negative amount)
 
 | Flag | Condition |
 |---|---|
-| HIGH_AMOUNT | amount is above the threshold (configurable, default 10000) |
+| HIGH_AMOUNT | amount is at or above above the threshold (configurable, default 10000) |
 | HIGH_VELOCITY | more than 5 transactions for the account in 60 s (Redis INCR + EXPIRE) |
 | BLOCKED_MERCHANT | merchant is on the blocklist |
+Boundary: an amount of exactly 10000 is flagged; 9999.99 is not.
 
 A transaction can carry more than one flag.s
